@@ -1,14 +1,14 @@
 /** 
 KEVIN
-(Nora, Hans, Neil, Hatch, Justin, ???)
+(Nora, Hans, Neil, Hatch, Justin, Alfred)
 APCS
 HW 09 -- even more greetings
 2021-10-03
 */
 
-public class BigSib {
-   public static void greet(String name) {
-	   System.out.println("Hi " + name + "! How're you doing?");
+public class BigSib2 {
+   public static String greet(String name) {
+	   return("Hi " + name + "! How're you doing?");
   }
 
 }
