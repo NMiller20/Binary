@@ -14,7 +14,7 @@ public class BigSib2 {
 }
 /** 
 DISCOVERIES: 
-- You can have a Java program invoke functions from java files within the same directory as itself
+- (see other file)
 
 UNRESOLVED QUESTIONS:
 (none)
