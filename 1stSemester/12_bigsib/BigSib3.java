@@ -9,7 +9,7 @@ HW 09 -- even more greetings
 public class BigSib3 {
 	public String HelloMsg = "";
 	
-	public BigSib3(String message) {
+	public void setHelloMsg(String message) {
 		HelloMsg = message;
 	} 
    	

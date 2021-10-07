@@ -11,18 +11,19 @@ public class Greet5 {
 		
 		String greeting;
 
-		BigSib3 richard = new BigSib3("Word up");
+		BigSib3 richard = new BigSib3();
 		
+		richard.setHelloMsg("Word up");
 		System.out.println(richard.greet("freshman"));
 		
-		/**richard.setHelloMsg("Salutations");
+		richard.setHelloMsg("Salutations");
 		System.out.println(richard.greet("Dr. Spaceman"));
 		
 		richard.setHelloMsg("Hey ya");
 		System.out.println(richard.greet("Kong Fooey"));
 		
 		richard.setHelloMsg("Sup");
-		System.out.println(richard.greet("mom")); */
+		System.out.println(richard.greet("mom")); 
 		
   }
   
