@@ -19,7 +19,8 @@ UNRESOLVED QUESTIONS:
 public class Teller { 
 
 	public static void main(String[] args) {
-		//One issue with Clueless Cats' code: You can deposit negative values and end up with a negative balance
+		//One issue with Clueless Cats' code: You can deposit negative values and end up with a negative balance. 
+		// However, after that, you can't withdraw, and you get no error message for trying. 
 		BankAccount3 ba = new BankAccount3();
 		ba.setName("John");
 		ba.setPasswd("p");
@@ -35,6 +36,9 @@ public class Teller {
 						   // other than by depositing and withdrawing money?
 		System.out.println(ba.toString());
 		
+		ba.authenticate(123456789, "p");
+		ba.authenticate(123456789, "pass"); // (successful)
+		
 		
 		//Testing negative balance
 		BankAccount3 acc = new BankAccount3();
@@ -44,7 +48,7 @@ public class Teller {
 		acc.setAcctNum(123456780);
 		acc.setBalance(-50.00);
 		acc.deposit(40.00);
-		acc.withdraw(10.00);
+		acc.withdraw(10.00); // (successful)
 					
 		System.out.println(acc.toString());
 		
