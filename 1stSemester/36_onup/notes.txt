@@ -1,0 +1,29 @@
+Reminders to Self: 
+- NumErrorMessages != NumErrors
+- LocationOfErrorMessage != LocationOfError
+- Remedies suggested by error messages often go beyond the scope of this course and may not work. 
+
+Most Common Errors: 
+- You don't have matching: 
+	- brackets, parenthesis
+	- quotation marks
+	- types for the variabe you are creating
+- Semicolons!!
+- (for methods)
+	- Are the arguments in your invocation appropriate?
+	- instance vs. static methods
+	- The class or the object invoking the method is appropriate
+- Don't refer to instance variables in a static method
+
+Debugging by bisection - essentially a binary search for your error
+
+"hanging" - when you hit run and you get no return of anything - the program just keeps going and going
+	- if you're not sure which loop is the issue, print stuff at the beginning and the end of the loop and see what gets printed
+	- printing stuff in the midle of loops/recursion is esp helpful
+	
+StackOverflowError is a type of exception
+
+NullPointerException - when the variable in question is null
+ArithmeticException - generally division by 0
+
+	
