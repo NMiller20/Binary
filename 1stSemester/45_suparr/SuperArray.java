@@ -2,7 +2,7 @@
 // APCS1 pd0
 // HW44 -- expanding SuperArray functionality, encapsulation
 // 2021-12-08
-// Time Spent: 1 hr
+// Time Spent: 1.2hr
 
 /***
 DISCO/Reminders to selves:
