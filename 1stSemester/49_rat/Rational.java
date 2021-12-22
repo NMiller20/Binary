@@ -17,7 +17,7 @@
 
  QCC: What are other methods that we can add to enrich Rational.java?
  ******************************/
-
+import java.util.ClassCastExecption; 
 
 public class Rational implements Comparable {
 
@@ -89,7 +89,7 @@ need not reduce the fraction
         int reset = rat.numerator;
         rat.numerator = rat.numerator * this.denominator;
         this.denominator = commonDenom;
-        this.numerator = this.numerator - rat.numerator;o
+        this.numerator = this.numerator - rat.numerator;
         rat.numerator = reset; // resets parameter object to its original value
     }
 
@@ -101,15 +101,7 @@ need not reduce the fraction
                 denominator-=numerator;
             }
         } return numerator;
-    }Rational diff = new Rational(this.numerator, this.denominator);
-     diff.subtract(rat);
-     if (diff.floatVal() == 0) {
-       return 0;
-     } else if(diff.floatVal()>0){
-       return 1;
-     } else {
-       return -1;
-     }
+    }
 
     public void reduce(){
 
@@ -124,7 +116,7 @@ need not reduce the fraction
       if (rat instanceof Rational) {
         Rational workingRat = (Rational)(rat);
         Rational diff = new Rational(this.numerator, this.denominator);
-        diff.subtract(rat);
+        diff.subtract(workingRat);
         if (diff.floatVal() == 0) {
           return 0;
         } else if(diff.floatVal()>0){
@@ -212,7 +204,7 @@ need not reduce the fraction
         System.out.println("s is " + s);
         r.add(s); // 4/6 + 1/2 = 7/6
         System.out.println( r + " addition...expected 7/6" );
-        r.subtract(s); //expecting 7/6-1/2 = 8/12
+        r.subtract(s); //expecting 7/6-1/2 = 8/12numerator
         System.out.println(r + " subtraction... expected 8/12");
         System.out.println("\n");
 
