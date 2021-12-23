@@ -1,27 +1,23 @@
 /******************************
+
+
  // 3 Lucky Duckies: Gloria Lee, Ziying Jian, Nora Miller
  // APCS pd8
- // HW49 -- Rational Standards Compliance: getting something to match an interface and a superclass
- // 2021-12-22
+ // HW42 -- Be More Rational
+ // 2021-12-07
 
- Time Spent: 1.2hr
+ Time Spent: 1hr
 
  DISCO:
  * Since Comparable is an interface, it cannot be declared as an object type
- * instanceof - return t/f for whether or not an object is actually part of that class
- * Even though you know the variable type is a Rational Java doesn't. Typecasting explicity
- tells Java that the declared variable type is a Rational, or that one class is part of the other
- * After compiling, we get notes that Driver.java uses or overrides a deprecated API.
+ *
 
  QCC:
  * What are other methods that we can add to enrich Rational.java?
  * (Why) would a try-catch loop not be acceptable here?
 * When would throwing an ClassCastException or any exception be useful for us?
- * Did the instructions mean for us to write a method called equals with the same
-   signature as the built in one? because we ran it with the build in one, and as
-   mentioned in class previously, it seems to have just checked that all instance
-   variables were the same, since it said that two fractions with the same value
-   were not equal
+ *
+
  ******************************/
 
 public class Rational implements Comparable {
@@ -89,6 +85,7 @@ public class Rational implements Comparable {
         this.denominator = commonDenom;
         this.numerator = this.numerator - rat.numerator;
         rat.numerator = reset; // resets parameter object to its original value
+
     }
 
     public int gcd( int numerator, int denominator ){
@@ -116,7 +113,7 @@ public class Rational implements Comparable {
 ================================================================================
 */
     public int compareTo(Object rat){ // should be a rational; we have to deal with it separately if it isn't
-      if (rat instanceof  Rational) {
+      if (rat instanceof Rational) {
         Rational workingRat = (Rational)(rat);
         Rational diff = new Rational(this.numerator, this.denominator);
         diff.subtract(workingRat);
@@ -133,16 +130,6 @@ public class Rational implements Comparable {
       }
    }
 
-   public boolean equals(Object rat){ //
-     if (rat instanceof Rational) {
-       Rational workingRat = (Rational)(rat);
-       if (workingRat.floatVal() == this.floatVal()){
-         return true;
-       } return false;
-     } else {
-       ClassCastException notARat = new ClassCastException("\nequals() input not a Rational");
-       throw notARat;
-     }
-   }
+
 
 }//end class
