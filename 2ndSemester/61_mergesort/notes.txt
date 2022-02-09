@@ -1,0 +1,34 @@
+MNM: Mosiah, Nora Miller
+APCS pd6
+HW61: Instructions so Simple...
+2022-02-07
+time spent: .8 hrs
+
+
+DISCO
+------------------------------------------------
+* Should be n*log(n) in terms of big O notation - way faster than n^2
+================================================
+
+
+QCC
+------------------------------------------------
+* (more of a question to ourselves) What ACTUALLY went wrong with
+our first two attempts at merge?
+* The "end case" when one array has run out of elements is VERY annoying to handle,
+  and took us a lot of time.
+* In what circumstances is mergesort the best sort to use? It seems
+  like it requires a lot of memory compared to the n^2 sorts
+================================================
+
+
+THINKER FIRMWARE
+------------------------------------------------
+* If turtle receives an unsorted deck (height > 1), split the deck and give it to 2 others
+* If turtle receives a single sorted deck (height = 1), give it back to the turtle it originally got
+cards from
+* If turtle is receiving two sorted decks:
+   * Compare the first two cards in the decks
+   * Place the smaller of the two in a stack (any card is smaller than no card)
+   * Repeat for the first two cards in the decks
+================================================
