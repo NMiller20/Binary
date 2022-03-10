@@ -1,14 +1,14 @@
-// TNPG: Minions (Melody Lew, Nora Miller, Nicole Zhou)
-// APCS
+// Minions (Melody Lew, Nora Miller, Nicole Zhou)
+// APCS pd06
 // HW72: So So Fast
-// 2022-03-08
-// time spent: 2 hrs
+// 2022-03-08t
+// time spent:  1.5 hrs
 
 /*
 ALGO:
 We want to find the yth smallest term:
-partition the array in the middle
-compare the index of the pivot point to the index of the yth term we intend to find
+0. partition the array in the middle
+1. compare the index of the pivot point to the index of the yth term we intend to find
   if it is greater:
     partition the LOWER HALF of the first partition
   if it is less:
@@ -16,28 +16,24 @@ compare the index of the pivot point to the index of the yth term we intend to f
   if it is the same:
     then we have found the yth smallest value!
     return and exit
-continue doing this until you have returned and exited
+2. continue doing this until you have returned and exited
 
-BEST CASE SCENARIO:
-When the term we are looking for is the pivot value of the first partition.
-In this case, partition is only invoked once, which is the lowest possible
-number of invocations.
-Since partitioner is O(n), this case is O(n)
 
-WORST CASE SCENARIO:
-This would be the maximum number of invocations possible of partitioner, for example
-if you're looking for the first smallest value. This would require roughly log_2(n)
-partitions, each of which is O(n). Simplifying this, the worst case will be
-O(n log(n) ).
+BEST CASE SCENARIO: O(logn) which occurs if the partition is in the middle and the yth term is close to the middle. Since we are partitioning 
+from the middle, if yth is close to the middle then the time complexity is reduced.
+
+WORST CASE SCENARIO: O(n^2) which occurs if we have a partition in the middle and the yth term is an extreme value. The program will have to go through
+each element in the array and compare it to each other element, and if the yth term is the min or max element, the program will have to go through the
+other elements again to compare.
 
 DISCO:
-0)
+0) The type of the parameter is not needed if you are invoking the method with the same parameters within that method
 
 QCC:
-0)
+0) Did this have to be done recursively?
 */
 
-public class FastSelect{
+public class QuickSelect{
   //--------------v  HELPER METHODS  v--------------
   //swap values at indices x, y in array o
   public static void swap( int x, int y, int[] o ){
