@@ -13,17 +13,24 @@
  *  built-in Java library interface.
  **/
 
-public interface List{
-  //add node to list, containing input String as its data
-  public boolean add( String x );
+ public interface List
+ {
+   //add node to list, containing input String as its data
+   public boolean add( String x );
 
-  //return data in element at position i
-  public String get( int i );
+   //insert at specified index
+   public void add( int index, String newVal );
 
-  //overwrite data in element at position i
-  public String set( int i, String x );
+   //remove node from list, return its data
+   public String remove( int index );
 
-  //return length of list
-  public int size();
+   //return data in element at position i
+   public String get( int i );
 
-}//end interface
+   //overwrite data in element at position i
+   public String set( int i, String x );
+
+   //return length of list
+   public int size();
+
+ }//end interface
