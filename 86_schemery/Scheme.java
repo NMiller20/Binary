@@ -2,20 +2,35 @@
 // APCS
 // HW86 -- What a Racket
 // 2022-03-31
-// time spent:
+// time spent: 2+ hours
 
 /***
  * class Scheme
  * Simulates a rudimentary Scheme interpreter
  *
  * ALGORITHM for EVALUATING A SCHEME EXPRESSION:
- *   1. Steal underpants.
- *   2. ...
- *   5. Profit!
+ *   1. Parse string, pushing numbers and open parentheses to one stack and
+        operators to another, until you reach a close parenthesis.
+     2. At this point, pop the most recent operator, and as many numbers as
+        you can before reaching an open parenthesis
+     3. Using the values from the previous step, evaluate the expression and
+        push the value to the numbers and parentheses stack.
+
+     4. Continue until you reach the end of the string.
+     5. Parse the string, from beginning to end, until all that remains is a
+        number, the final answer, in the numbers and parentheses stack.
  *
- * STACK OF CHOICE: ____ by ____
- * b/c ...
+ * STACK OF CHOICE: ArrayList stack
+ * b/c it (and LinkedList) support generalized types.
  **/
+
+
+ /*QCC:
+ - What is causing the initial parenthesis not to be pushed to the stack?
+
+ DISCO:
+ - Integer.parseInt() is how you convert strings to ints.
+ */
 
 public class Scheme{
   /***
@@ -36,7 +51,7 @@ public class Scheme{
       // unless there's nothing in the stacks besides a single number,
       // parse the array of string fragments:
       int i = 0; // starting index
-      while (i < expression.length){
+      while (i < expression.length-1){
         // add stuff to the stack unless it's a (
         System.out.println("Current element: " + expression[i]);
         // if (isNumber(expression[i]) || expression[i] == "(") {
@@ -65,7 +80,7 @@ public class Scheme{
           // don't do anything if the thing you reach isn't a
           // number, operator, or parenthesis.
         }
-        i = i + 1; 
+        i = i + 1;
       } //  done this passthrough:
 
     } // done all of the passthroughs
