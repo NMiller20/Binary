@@ -1,0 +1,24 @@
+Algo:
+
+1. Parse the string:
+  If you see an open parenthesis or a number, you add that to the content
+  stack.
+  If you see an operator, add that to the operator stack.
+  When you see a close parenthesis, pause:
+2. (use while loop)
+Pop the operator
+Pop numbers from the content stack, and do operations with them,
+  until you pop an open parenthesis instead of a number.
+  At this point, add your result to the content stack (as a string)
+
+  Return to parsing the String
+
+  Once you're at the end of the string, check to see if there's anything 
+  left in either , besides exactly one number in the content stack.
+
+  If that's the case, pop that number, return it, and exit the function.
+  If not, traverse the string another time.
+
+
+
+Keep parsing through the string until you reach a close parenthesis.
