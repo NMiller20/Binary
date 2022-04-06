@@ -32,4 +32,9 @@ public class WeatherStation {
       return this.state.equals(st);
    }
    
+   public boolean isLocatedAtLat(String lt) {
+        double latDub = Double.parseDouble(lt);
+	return this.lat == latDub; 
+   }
+
 }

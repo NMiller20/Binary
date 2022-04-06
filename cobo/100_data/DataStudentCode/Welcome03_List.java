@@ -15,6 +15,7 @@ public class Welcome03_List {
       System.out.println("Total stations: " + allstns.size());
       
       Scanner sc = new Scanner(System.in);
+
       System.out.println("Enter a state abbreviation: ");
       String state = sc.next();
       System.out.println("Stations in " + state);
@@ -23,5 +24,15 @@ public class Welcome03_List {
             System.out.println("  " + ws.getId() + ": " + ws.getName());
          }
       }
+     System.out.println("Enter a latitude");
+      String lat = sc.next();
+
+     System.out.println("By latitude: "); 
+     for (WeatherStation ws : allstns) {
+         if (ws.isLocatedAtLat(lat)) {
+		System.out.println("  " + ws.getId() + ": " + ws.getName());
+	}
+     }
    }
 }
+
