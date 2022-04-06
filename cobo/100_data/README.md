@@ -37,6 +37,26 @@ Is there a relationship between sugar and rating?
 public class CerealData
 2.4 
 Based on the table, there will be 14 instance variables for each CerealData
+2.5 Instance variables: 
+String Type; 
+int calories; 
+double gProtein
+double gFat
+double mgSodium
+double gFiber
+double gCarbs
+double gSugar
+int mgPotassium
+int vitamins
+double weight
+double cups
+double rating
+2.6 
+
+2.8
+You can determine average rating of several different cereals
+2.9 
+You can't determine ann
 
 
 
