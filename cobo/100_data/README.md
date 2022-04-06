@@ -33,7 +33,12 @@ Yes, there are situations in which it is worthwhile to sacrifice privacy for dat
 Cereal type (best names for the data in each rows)
 2.2 A question about the above table: 
 Is there a relationship between sugar and rating? 
-2.3
+2.3 Class to answer question above:
+public class CerealData
+2.4 
+Based on the table, there will be 14 instance variables for each CerealData
+
+
 
 
 
