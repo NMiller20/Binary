@@ -1,12 +1,6 @@
-// Non-Men Alcoholics Anonymous: Nora Miller, Ameer Alnasser
-// APCS pd6
-// HW96 -- reverse engineering
-// 2022-05-10w
-// time spent: 2 hrs
-
 /**
  * class BST
- * v1:partial
+ * v2:partial
  * SKELETON
  * Implementation of the BINARY SEARCH TREE abstract data type (ADT)
  *
@@ -28,10 +22,11 @@ public class BST
   /**
    * default constructor
    */
- BST()
+  BST()
   {
-    _root=null;
+    _root = null;
   }
+
 
   /**
    * void insert( int )
@@ -40,45 +35,37 @@ public class BST
   public void insert( int newVal )
   {
     TreeNode newNode = new TreeNode( newVal );
-    if(_root!=null){
-    insert(_root,newNode);
-    }
-    else{
-      _root=newNode;
-    }
-  }
-    /*** YOUR IMPLEMENTATION HERE ***/
 
+    if ( _root == null ) {
+      _root = newNode;
+      return;
+    }
+    insert( _root, newNode );
+  }
   //recursive helper for insert(int)
   public void insert( TreeNode stRoot, TreeNode newNode )
   {
-    /*** YOUR IMPLEMENTATION HERE ***/
-    TreeNode one,two;
-        if (newNode.getValue()<stRoot.getValue()){
-          if(stRoot.getLeft()==null){
-          stRoot.setLeft(newNode);
-        }
-        else{
-          one=stRoot.getLeft();
-          insert(one,newNode);
-        }
-      }
-
-    else{
-      if(stRoot.getRight()==null){
-      stRoot.setRight(newNode);
+    if ( newNode.getValue() < stRoot.getValue() ) {
+      //if no left child, make newNode the left child
+      if ( stRoot.getLeft() == null )
+        stRoot.setLeft( newNode );
+      else //recurse down left subtree
+        insert( stRoot.getLeft(), newNode );
+      return;
     }
-    else{
-      two=stRoot.getRight();
-      insert(two,newNode);
+    else { // new val >= curr, so look down right subtree
+      //if no right child, make newNode the right child
+      if ( stRoot.getRight() == null )
+        stRoot.setRight( newNode );
+      else //recurse down right subtree
+        insert( stRoot.getRight(), newNode );
+      return;
     }
-}
-}
+  }//end insert()
 
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   //~~~~~~~~~~~~~v~~TRAVERSALS~~v~~~~~~~~~~~~~~~~~~~~~
-
   // each traversal should simply print to standard out
   // the nodes visited, in order
 
@@ -88,189 +75,267 @@ public class BST
     preOrderTrav( _root );
   }
   public void preOrderTrav( TreeNode currNode )
-    {
-      System.out.println(currNode.getValue());
-      if (currNode.getLeft() != null) {
-        preOrderTrav(currNode.getLeft());
-      }
-      if(currNode.getRight() != null) {
-        preOrderTrav(currNode.getRight());
-      }
-    }
+  {
+    if ( currNode == null )
+      return;
+    System.out.print( currNode.getValue() + " " );
+    preOrderTrav( currNode.getLeft() );
+    preOrderTrav( currNode.getRight() );
+  }
 
   //recurse left, process root, recurse right
   public void inOrderTrav()
   {
-    inOrderTrav(_root);
+    inOrderTrav( _root );
   }
   public void inOrderTrav( TreeNode currNode )
   {
-    /*** YOUR IMPLEMENTATION HERE ***/
-    if (currNode.getLeft() != null) {
-      preOrderTrav(currNode.getLeft());
-    }
-    System.out.println(currNode.getValue());
-
-    if(currNode.getRight() != null) {
-      preOrderTrav(currNode.getRight());
-    }
-
+    if ( currNode == null )
+      return;
+    inOrderTrav( currNode.getLeft() );
+    System.out.print( currNode.getValue() + " " );
+    inOrderTrav( currNode.getRight() );
   }
 
   //recurse left, recurse right, process root
   public void postOrderTrav()
   {
-  postOrderTrav(_root);
+    postOrderTrav( _root );
   }
   public void postOrderTrav( TreeNode currNode )
   {
-    if (currNode.getLeft() != null) {
-      preOrderTrav(currNode.getLeft());
-    }
-    if(currNode.getRight() != null) {
-      preOrderTrav(currNode.getRight());
-    }
-    System.out.println(currNode.getValue());
+    if ( currNode == null )
+      return;
+    postOrderTrav( currNode.getLeft() );
+    postOrderTrav( currNode.getRight() );
+    System.out.print( currNode.getValue() + " "  );
+  }
 
+  public String inOrderTravStr( TreeNode currNode ) {
+    String retStr = "";
+    if ( currNode == null )
+      return retStr;
+    retStr += inOrderTravStr( currNode.getLeft() );
+    retStr += " " + currNode.getValue();
+    retStr += inOrderTravStr( currNode.getRight() );
+    return retStr;
+  }
+  public String preOrderTravStr( TreeNode currNode ) {
+    String retStr = "";
+    if ( currNode == null )
+      return retStr;
+    retStr += " " + currNode.getValue();
+    retStr += preOrderTravStr( currNode.getLeft() );
+    retStr += preOrderTravStr( currNode.getRight() );
+    return retStr;
+  }
+  public String postOrderTravStr( TreeNode currNode ) {
+    String retStr = "";
+    if ( currNode == null )
+      return retStr;
+    retStr += postOrderTravStr( currNode.getLeft() );
+    retStr += postOrderTravStr( currNode.getRight() );
+    retStr += " " + currNode.getValue();
+    return retStr;
   }
 
   //~~~~~~~~~~~~~^~~TRAVERSALS~~^~~~~~~~~~~~~~~~~~~~~~
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  /*****************************************************
-     * TreeNode search(int)
-     * returns pointer to node containing target,
-     * or null if target not found
-     *****************************************************/
-    TreeNode search( int target )
-    {
-      return search2(_root,target);
+
+
+  //~~~~~~~~~~~~~v~~MISC.HELPERS~~v~~~~~~~~~~~~~~~~~~~
+  public boolean isLeaf( TreeNode node )
+  {
+    return ( node.getLeft() == null
+             &&
+             node.getRight() == null );
+  }
+  //~~~~~~~~~~~~~^~~MISC.HELPERS~~^~~~~~~~~~~~~~~~~~~~
+
+
+  //overridden toString
+  public String toString()
+  {
+    return
+      " pre-order trav:" + preOrderTravStr( _root ) + '\n' +
+      "  in-order trav:" + inOrderTravStr( _root ) + '\n' +
+      "post-order trav:" + postOrderTravStr( _root ) + '\n' +
+      "         height: " + height() + '\n' +
+      "     num leaves: " + numLeaves()
+      ;
+  }
+
+
+  /**
+   * TreeNode search(int)
+   * returns pointer to node containing target,
+   * or null if target not found
+   */
+  TreeNode search( int target )
+  {
+    return search( target, _root );
+  }
+  TreeNode search( int target, TreeNode currNode )
+  {
+    if ( currNode==null || currNode.getValue()==target )
+      return currNode;
+    else if ( target < currNode.getValue() )
+      return search( target, currNode.getLeft() );
+    else if ( target > currNode.getValue() )
+      return search( target, currNode.getRight() );
+    else
+      return null; //to get past compiler
+  }
+
+
+  /**
+   * int height()
+   * returns height of this tree (length of longest leaf-to-root path)
+   * eg: a 1-node tree has height 0
+   */
+  public int height()
+  {
+    return height( _root );
+  }
+  //recursive helper for height()
+  public int height( TreeNode currNode )
+  {
+    if ( currNode==null ) //Q: Why cannot use .equals() ?
+      return 0;
+    if ( isLeaf(currNode) )
+      return 0;
+    else //height is 1 for this node + height of deepest subtree
+      return 1 + Math.max( height(currNode.getLeft()),
+                           height(currNode.getRight()) );
+  }
+
+
+  /**
+   * int numLeaves()
+   * returns number of leaves in tree
+   */
+  public int numLeaves()
+  {
+    return numLeaves( _root );
+  }
+  public int numLeaves( TreeNode currNode ) {
+    int foo = 0;
+    if ( currNode == null )
+      return 0;
+    foo += numLeaves( currNode.getLeft() );
+    if ( isLeaf(currNode) )
+      foo++;
+    foo += numLeaves( currNode.getRight() );
+    return foo;
+  }
+
+
+  public TreeNode remove( int val){
+    // assuming this is a left child we're removing
+
+    // find the parent of the node we're removing
+    // set a temp to be that
+    // set  temp for the thing we're removing
+    // switch around the references
+
+    int n = val - start.getValue();
+    if (n==0){
+      return start;
+    } else if (n > 0) {
+      // right half
+      return searchHelper(target, start.getRight() );
     }
-    TreeNode search2(TreeNode check, int target )
-    {
-
-      if(check==null||check.getValue()==target){
-        return check;
-      }
-      else if(check.getValue()<target){
-        return search2(check.getRight(),target);
-      }
-      else{
-        return search2(check.getLeft(),target);
-      }
-    }
-
-    /*****************************************************
-     * int height()
-     * returns height of this tree (length of longest leaf-to-root path)
-     * eg: a 1-node tree has height 1
-     *****************************************************/
-    public int height()
-    {
-     return  height2(_root);
-    }
-    public int height2(TreeNode check)
-    {
-    	if(check.getRight()!=null&&check.getLeft()==null){
-        return 1+height2(check.getRight());
-      }
-     else if(check.getLeft()!=null&&check.getRight()==null){
-        return 1+height2(check.getLeft());
-      }
-     else if(check.getLeft()!=null&&check.getRight()!=null){
-       if(height2(check.getLeft())>height2(check.getRight())){
-         return height2(check.getLeft());
-       }
-       else{
-        return 1+height2(check.getRight());
-       }
-     }
-     else{
-      return 1;
-    }
-}
-
-    /*****************************************************
-     * int numLeaves()
-     * returns number of leaves in tree
-     *****************************************************/
-    public int numLeaves()
-    {
-      return numLeaves2(_root);
-    }
-
-      public int numLeaves2(TreeNode check) {
-
-          if (check==null){
-            return 0;
-          }
-          if (check.getLeft()==null&&check.getRight()==null) {
-              return 1;
-          }
-
-          return numLeaves2(check.getLeft())+numLeaves2(check.getRight());
-      }
+      // left half
+      return searchHelper(target, start.getLeft() );
+  }
 
 
-      public void remove(TreeNode check){
-        
-      }
+
+
   //main method for testing
   public static void main( String[] args )
   {
-
     BST arbol = new BST();
 
-          //PROTIP: sketch state of tree after each insertion
-          //        ...BEFORE executing these.
-          arbol.insert( 4 );
-          arbol.insert( 2 );
-          arbol.insert( 5 );
-          arbol.insert( 6 );
-          arbol.insert( 1 );
-          arbol.insert( 3 );
+    //PROTIP: sketch state of tree after each insertion
+    //        ...BEFORE executing these.
+    arbol.insert( 4 );
+    arbol.insert( 2 );
+    arbol.insert( 5 );
+    arbol.insert( 6 );
+    arbol.insert( 1 );
+    arbol.insert( 3 );
 
-          System.out.println( "\n-----------------------------");
-          System.out.println( "pre-order traversal:" );
-          arbol.preOrderTrav();
+    System.out.println( "\n-----------------------------");
+    System.out.println( "pre-order traversal:" );
+    arbol.preOrderTrav();
 
-          System.out.println( "\n-----------------------------");
-          System.out.println( "in-order traversal:" );
-          arbol.inOrderTrav();
+    System.out.println( "\n-----------------------------");
+    System.out.println( "in-order traversal:" );
+    arbol.inOrderTrav();
 
-          System.out.println( "\n-----------------------------");
-          System.out.println( "post-order traversal:" );
-          arbol.postOrderTrav();
+    System.out.println( "\n-----------------------------");
+    System.out.println( "post-order traversal:" );
+    arbol.postOrderTrav();
 
-          System.out.println( "\n-----------------------------");
+    System.out.println( "\n-----------------------------");
 
-          System.out.println("testing height....");
-          System.out.println(arbol.height() + " ... should be 2");
+    /**
+       EXPECTED OUTPUT for traversals:
+       -----------------------------
+       pre-order traversal:
+       4 2 1 3 5 6
+       -----------------------------
+       in-order traversal:
+       1 2 3 4 5 6
+       -----------------------------
+       post-order traversal:
+       1 3 2 6 5 4
+       -----------------------------
+    */
 
-          System.out.println( "\n-----------------------------");
-          System.out.println("testing search....");
-          System.out.println(arbol.search(4).getValue());
-          System.out.println(arbol.search(2).getValue());
-          System.out.println(arbol.search(5).getValue());
-          System.out.println(arbol.search(6).getValue());
-          System.out.println(arbol.search(1).getValue());
-          System.out.println(arbol.search(3).getValue());
-          System.out.println(arbol.search(9));
 
-          System.out.println( "\n-----------------------------");
-          System.out.println("testing numLeaves....");
-          System.out.println(arbol.numLeaves() + "... should be 3");
+    System.out.println("h:\t" + arbol.height());
+    System.out.println("nL:\t" + arbol.numLeaves());
 
-          BST a = new BST();
+    /*~~~~~~~~~~~~move~me~down~~~~~~~~~~~~~~~~~~~~~~
+      System.out.println("s(1):\t" + arbol.search(1).getValue());
+      System.out.println("s(2):\t" + arbol.search(2).getValue());
+      System.out.println("s(3):\t" + arbol.search(3).getValue());
+      System.out.println("s(4):\t" + arbol.search(4).getValue());
+      System.out.println("s(5):\t" + arbol.search(5).getValue());
+      System.out.println("s(6):\t" + arbol.search(6).getValue());
+      //System.out.println("s(7):\t" + arbol.search(7).getValue());
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-          a.insert( 4 );
-          a.insert( 2 );
-          a.insert( 5 );
-          System.out.println(a.numLeaves() + "... should be 2");
 
-          BST b = new BST();
-          b.insert( 6 );
-          b.insert( 3 );
-          b.insert( 1 );
-          System.out.println(b.numLeaves() + " ...should be 1");
+
+    //insering in this order will build a linked list to left
+    /*
+      arbol.insert( 6 );
+      arbol.insert( 5 );
+      arbol.insert( 3 );
+      arbol.insert( 4 );
+      arbol.insert( 2 );
+      arbol.insert( 1 );
+      arbol.insert( 0 );
+    */
+
+    System.out.println( "tree after insertions:\n" + arbol );
+    System.out.println();
+
+    System.out.println();
+    for( int i=-1; i<8; i++ ) {
+      System.out.println(" searching for "+i+": " + arbol.search(i) );
+    }
+
+    System.out.println();
+    System.out.println( arbol );
+
+    /*~~~~~~~~~~~~move~me~down~~~~~~~~~~~~~~~~~~~~~~
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
+  }
+
 }//end class
-}
